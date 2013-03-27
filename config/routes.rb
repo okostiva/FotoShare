@@ -1,6 +1,13 @@
 FotoShare::Application.routes.draw do
+	get 'login' => 'sessions#new'
+
   resources :users
 
+	controller :sessions do
+		get 'login' => :new
+		post 'login' => :create
+		delete 'logout' => :destroy
+	end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
