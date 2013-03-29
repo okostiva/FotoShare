@@ -1,11 +1,16 @@
 FotoShare::Application.routes.draw do
-	get 'login' => 'sessions#new'
+	root :to => 'sessions#new'	
 
   resources :users
+
+	controller :users do
+		get 'register' => :new
+	end
 
 	controller :sessions do
 		get 'login' => :new
 		post 'login' => :create
+		get 'logout' => :destroy
 		delete 'logout' => :destroy
 	end
 

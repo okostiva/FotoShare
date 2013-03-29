@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+	skip_before_filter :authorize
+
   def new
   end
 
@@ -8,12 +10,12 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to user
 		else
-			redirect_to login, alert: "Invalid username/password combination"
+			redirect_to login, alert: "Invalid username/password combination."
 		end
   end
 
   def destroy
 		session[:user_id] = nil
-		redirect_to login, notice: "Successfully logged out"
+		redirect_to login_path, notice: "Successfully logged out."
   end
 end
