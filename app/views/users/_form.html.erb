@@ -23,7 +23,7 @@
     <%= f.label :last_name, 'Last Name' %><br />
     <%= f.text_field :last_name %>
   </div>
-<% if session[:user_id] != nil %>
+<% if session[:user_id] != nil && controller.action_name != "new" %>
 	<div class="user_image">
 		<%= image_tag @user.avatar.url %>
 	</div>

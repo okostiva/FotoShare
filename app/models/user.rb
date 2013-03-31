@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	validates :user_name, presence: true, uniqueness:true
 	validates :first_name, presence: true
 	validates :last_name, presence: true
-	validates_attachment :avatar, :content_type => { :content_type => ["image/jpg","image/png","image/gif"], :message => "must be a jpg, png or gif image." }, 
+	validates_attachment :avatar, :content_type => { :content_type => ["image/jpg","image/jpeg","image/png","image/gif"], :message => "must be a jpg, png or gif image." }, 
 		:size => { :in => 0..1.megabytes, :message => "must be less than 1 megabyte" }
 	has_secure_password
 
