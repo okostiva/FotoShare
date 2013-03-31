@@ -12,17 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_name %><br />
+    <%= f.label :user_name, 'Username' %><br />
     <%= f.text_field :user_name %>
   </div>
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name, 'First Name' %><br />
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name, 'Last Name' %><br />
     <%= f.text_field :last_name %>
   </div>
+<% if session[:user_id] != nil %>
+	<div class="user_image">
+		<%= image_tag @user.avatar.url %>
+	</div>
+	<div class="upload_image">
+		<%= f.file_field :avatar %>
+	</div>
+<% end %>
   <div class="field">
     <%= f.label :password, 'Password' %><br />
     <%= f.password_field :password %>

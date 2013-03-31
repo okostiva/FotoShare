@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
 
 	before_filter :authorize
 
+	def application
+		if session[:user_id] == nil
+			@user = nil
+		else
+			@user = User.find(session[:user_id])
+		end
+	end
+
 	protected
 		def authorize
 			unless User.find_by_id(session[:user_id])

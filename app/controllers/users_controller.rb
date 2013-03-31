@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by_id(session[:user_id])
   end
 
   # POST /users
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to login, notice: 'Registration Successful. You may now log in to FotoShare' }
+        format.html { redirect_to login_path, notice: 'Registration Successful. You may now log in to FotoShare.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -58,11 +58,11 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
+    @user = User.find_by_id(session[:user_id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: '#{@user.user_name} was successfully updated.' }
+        format.html { redirect_to @user, notice: "#{@user.user_name} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

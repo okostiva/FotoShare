@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to user
 		else
-			redirect_to login, alert: "Invalid username/password combination."
+			redirect_to login_path, alert: "Invalid username/password combination."
 		end
   end
 

@@ -8,8 +8,13 @@
 </head>
 <body>
 
+<% if session[:user_id] == nil %>
 <p><%= link_to 'Register', register_path %></p>
+<p><%= link_to 'Login', login_path %></p>
+<% else %>
+<p>Welcome, <%= link_to "#{@user.first_name} #{@user.last_name}", @user %></p>
 <p><%= link_to 'Logout', logout_path %></p>
+<% end %>
 
 <%= yield %>
 

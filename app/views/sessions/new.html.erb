@@ -11,8 +11,8 @@
 <%= form_tag do %>
 
 	<div class="field">
-		<%= label_tag :user_name %><br />
-		<%= text_field_tag :user_name, params[:name] %>
+		<%= label_tag :user_name, 'Username' %><br />
+		<%= text_field_tag :user_name, params[:user_name] %>
 	</div>
 	<div class="field">
 		<%= label_tag :password, 'Password' %><br />
