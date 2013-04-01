@@ -13,11 +13,9 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= image_tag user.avatar.url(:thumb) %></td>
-    <td><%= "#{user.first_name} #{user.last_name} (#{user.user_name})" %></td>
+    <td><%= link_to "#{user.first_name} #{user.last_name} (#{user.user_name})", user %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New User', new_user_path %>
