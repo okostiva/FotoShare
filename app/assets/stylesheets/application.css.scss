@@ -1,0 +1,95 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+html {
+    background: #091926;
+}
+
+body {
+    background: #F2F2F2;
+    font-family: Arial;
+    width: 900px;
+    border: 1px solid #000000;
+		margin: auto;
+    font-weight: lighter;
+    min-height: 100px;
+}
+
+.navbar {
+	background: #C8D9B0;
+	border: 2px solid;
+	font: small-caps 40px/40px "Times New Roman", serif;
+	color: #314A59;
+	text-align: center;
+	height: 50px;
+
+	img {
+		float: left;
+	}
+}
+
+div#leftBanner {
+	float: left;
+	width: 300px;
+	position: relative;
+	text-align: left;
+}
+
+div#rightBanner {
+	float: right;
+	width: 300px;
+	position: relative;
+	text-align: right;
+}
+
+div#centerBanner {
+	float: left;
+	text-align: center;
+	position: relative;
+	width: 250px;
+}
+
+div#centerBanner ul { 
+   list-style: none; 
+} 
+
+div#centerBanner ul li { 
+	display: inline; 
+	padding-right: 15px;
+} 
+
+div#centerBanner ul a:link,a:visited,a:active{ 
+   text-decoration: none;  
+} 
+
+div#centerBanner ul a:hover{ 
+   text-decoration: none;  
+}
+
+h1 {
+    letter-spacing: -2px;
+    font-weight: 900;
+    font-size: 34px;
+    margin: 0;
+}
+
+
+#notice {
+	color: #000 !important;
+	border: 2px solid red;
+	padding: 1em;
+	margin-bottom: 2em;
+	background-color: #f0f0f0;
+	font: bolder smaller sans-serif;
+}
