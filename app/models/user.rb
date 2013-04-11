@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :photos, dependent: :destroy
+
   attr_accessible :avatar, :first_name, :last_name, :password, :password_confirmation, :user_name
 	
 	validates :user_name, presence: true, uniqueness:true

@@ -1,4 +1,7 @@
 FotoShare::Application.routes.draw do
+  resources :photos
+
+
 	get 'register' => 'users#new'
 
   resources :users

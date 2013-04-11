@@ -18,7 +18,9 @@
 		<ul>
 			<li><%= link_to 'Home', @logged_in_user %></li>
 			<li><%= link_to 'Users', users_path %></li>
-			<li><%= link_to 'Me', @logged_in_user %></li>
+			<li><%= link_to 'My Photos', photos_path %></li>
+			<li><%= link_to 'Upload Photo', photos_path %></li>
+			<li><%= link_to 'Friends', '/#' %></li>
 		</ul>
 	<% end %>
 	</div>
