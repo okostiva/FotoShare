@@ -1,3 +1,28 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.buttons {
+	text-align: center;
+}
+
+.actions {
+	height: 30px;
+}
+
+span {
+	float: left;
+	width: 33%;
+}
+
+span>a {
+  color: #F2F2F2;
+  &:visited {
+    color: #F2F2F2;
+  }
+  &:hover {
+    color: #F2F2F2;
+		background-color: #F2F2F2;
+  }
+}
+

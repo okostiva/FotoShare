@@ -1,23 +1,29 @@
-<h1>Listing photos</h1>
+<h2><%= "#{User.find(params[:user_id]).first_name}'s Photos" %></h2>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @photos.each do |photo| %>
-  <tr>
-    <td><%= photo.user_id %></td>
-    <td><%= link_to 'Show', photo %></td>
-    <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-    <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @logged_in_user == @user_to_view %>
+	<div id="buttons">
+		<span>
+			<%= select_tag 'size', options_for_select([["Small", :small], ["Medium", :medium], ["Large", :large]]), 
+					{ :prompt => "Image Size" } %>		
+		</span>
+		<span>
+			<%= select_tag 'sort', options_for_select([["Sort By", 0], ["Most Recent First", 1], ["Oldest First", 2]]) %>
+		</span>
+		<span>
+			<%= button_to 'Upload Photo', new_photo_path, :method => :get %>
+		</span>
+	</div>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Photo', new_photo_path %>
+<% if @photos.count > 0 %>
+	<% @photos.each do |photo| %>
+		<% if @logged_in_user == @user_to_view %>
+			<%= link_to image_tag(photo.picture.url(:medium), :border => 0), edit_photo_path(photo) %>
+		<% else %>
+			<%= image_tag(photo.picture.url(:medium)) %>
+		<% end %>
+		<p><%= photo.caption %></p>
+	<% end %>
+<% else %>
+	<p>No photos yet</p>
+<% end %>

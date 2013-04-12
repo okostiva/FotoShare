@@ -1,10 +1,16 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+<% end %>
 
-<p>
-  <b>User:</b>
-  <%= @photo.user_id %>
-</p>
+<div class="user_image">
+	<% if @photo.user_id == @logged_in_user.id %>
+		<%= link_to image_tag(@photo.picture.url, :border => 0), edit_photo_path(@photo) %>
+	<% else %>
+		<%= image_tag(@photo.picture.url) %>
+	<% end %>
+</div>
+<div class="field">
+  <p><%= @photo.caption %></p>
+</div>
 
-
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= button_to 'Back', photos_path, method: :get %>

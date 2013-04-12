@@ -11,11 +11,29 @@
     </div>
   <% end %>
 
+	<div class="user_image">
+		<%= image_tag @photo.picture.url %>
+	</div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.label :caption, 'Caption:' %>
+    <%= f.text_field :caption %>
   </div>
+	<div class="upload_image">
+		<%= f.file_field :picture %>
+	</div>
   <div class="actions">
-    <%= f.submit %>
+		<% if params[:action] == "new" %>
+    	<%= submit_tag("Upload Photo") %>
+		<% else %>
+			<span>
+				<%= link_to (content_tag :button, 'Back', :type => :button), photos_path %>
+			</span>	
+			<span>
+				<%= submit_tag("Save") %>
+			</span>	
+			<span>
+				<%= button_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' } %>
+			</span>
+		<% end %>
   </div>
 <% end %>

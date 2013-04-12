@@ -2,12 +2,21 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+		if params[:user_id] == nil
+			params[:user_id] = @logged_in_user.id
+		end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @photos }
-    end
+		if !User.exists?(params[:user_id])
+			render_404
+		else
+			@user_to_view = User.find(params[:user_id])
+			@photos = @user_to_view.photos
+
+		  respond_to do |format|
+		    format.html # index.html.erb
+		    format.json { render json: @photos }
+		  end
+		end
   end
 
   # GET /photos/1
@@ -41,10 +50,11 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(params[:photo])
+		@photo.user_id = @logged_in_user.id
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to @photo, notice: 'Photo was uploaded successfully.' }
         format.json { render json: @photo, status: :created, location: @photo }
       else
         format.html { render action: "new" }
@@ -60,7 +70,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to @photo, notice: 'Photo was updated successfully.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
