@@ -1,26 +1,34 @@
-<h2><%= "#{User.find(params[:user_id]).first_name}'s Photos" %></h2>
+<%= image_tag(User.find(params[:user_id]).avatar(:mini)) %>
+<h2 class="userLabel"><%= "#{User.find(params[:user_id]).first_name}'s Photos" %></h2>
 
+
+<div id="actions">
+	<span class="action">
+		<%= select_tag 'size', options_for_select([["Small", :small], ["Medium", :medium], ["Large", :large]]), 
+				{ :prompt => "Image Size",
+					:onChange => "window.location = '#{photos_path(:user_id => params[:user_id])}';" }%>
+	</span>
+	<span class="action">
+		<%= select_tag 'sort', options_for_select([["Sort By", 0], ["Most Recent First", 1], ["Oldest First", 2]]) %>
+	</span>
 <% if @logged_in_user == @user_to_view %>
-	<div id="buttons">
-		<span>
-			<%= select_tag 'size', options_for_select([["Small", :small], ["Medium", :medium], ["Large", :large]]), 
-					{ :prompt => "Image Size" } %>		
-		</span>
-		<span>
-			<%= select_tag 'sort', options_for_select([["Sort By", 0], ["Most Recent First", 1], ["Oldest First", 2]]) %>
-		</span>
-		<span>
+		<span class="action">
 			<%= button_to 'Upload Photo', new_photo_path, :method => :get %>
 		</span>
 	</div>
+<% else %>
+	</div>
 <% end %>
+
+<table>
+</table>
 
 <% if @photos.count > 0 %>
 	<% @photos.each do |photo| %>
 		<% if @logged_in_user == @user_to_view %>
 			<%= link_to image_tag(photo.picture.url(:medium), :border => 0), edit_photo_path(photo) %>
 		<% else %>
-			<%= image_tag(photo.picture.url(:medium)) %>
+			<%= link_to image_tag(photo.picture.url(:medium)), photo_path(photo) %>
 		<% end %>
 		<p><%= photo.caption %></p>
 	<% end %>

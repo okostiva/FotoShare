@@ -10,7 +10,7 @@
 	height: 30px;
 }
 
-span {
+span.action {
 	float: left;
 	width: 33%;
 }
@@ -26,3 +26,10 @@ span>a {
   }
 }
 
+.userLabel {
+	display:inline;
+}
+
+img {
+	margin-top: 5px;
+}

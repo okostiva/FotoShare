@@ -1,3 +1,6 @@
+<%= image_tag(User.find(@photo.user_id).avatar(:mini)) %>
+<h2 class="userLabel"><%= "#{User.find(@photo.user_id).first_name}'s Photo" %></h2>
+
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
@@ -13,4 +16,8 @@
   <p><%= @photo.caption %></p>
 </div>
 
-<%= button_to 'Back', photos_path, method: :get %>
+<div class="actions">
+	<span>
+		<%= link_to (content_tag :button, 'Back', :type => :button), photos_path(:user_id => @photo.user_id) %>
+	</span>
+</div>

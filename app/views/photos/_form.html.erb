@@ -25,13 +25,13 @@
 		<% if params[:action] == "new" %>
     	<%= submit_tag("Upload Photo") %>
 		<% else %>
-			<span>
+			<span class="action">
 				<%= link_to (content_tag :button, 'Back', :type => :button), photos_path %>
 			</span>	
-			<span>
+			<span class="action">
 				<%= submit_tag("Save") %>
 			</span>	
-			<span>
+			<span class="action">
 				<%= button_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' } %>
 			</span>
 		<% end %>
