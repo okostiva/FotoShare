@@ -2,6 +2,20 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
+		@photo_count = 0
+
+		case params[:size]
+			when "small"
+				@row_count = 5
+			when "medium"
+				@row_count = 3
+			when "large"
+				@row_count = 1
+			else
+				@row_count =3
+				params[:size] = :medium
+		end
+
 		if params[:user_id] == nil
 			params[:user_id] = @logged_in_user.id
 		end

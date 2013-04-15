@@ -6,10 +6,12 @@
 	<span class="action">
 		<%= select_tag 'size', options_for_select([["Small", :small], ["Medium", :medium], ["Large", :large]]), 
 				{ :prompt => "Image Size",
-					:onChange => "window.location = '#{photos_path(:user_id => params[:user_id])}';" }%>
+					:onChange => "window.location = '#{photos_path}?size=' + this.options[this.selectedIndex].value + '&user_id=#{params[:user_id]}';" }%>
 	</span>
 	<span class="action">
-		<%= select_tag 'sort', options_for_select([["Sort By", 0], ["Most Recent First", 1], ["Oldest First", 2]]) %>
+		<%= select_tag 'sort', options_for_select([["Newest First", :newest], ["Oldest First", :oldest]]),
+			{ :prompt => "Sort By",
+				:onChange => "window.location = '#{photos_path}?sort=' + this.options[this.selectedIndex].value + '&user_id=#{params[:user_id]}';" } %>
 	</span>
 <% if @logged_in_user == @user_to_view %>
 		<span class="action">
@@ -20,18 +22,29 @@
 	</div>
 <% end %>
 
-<table>
-</table>
-
+<table class="photos">
+	<tr>
 <% if @photos.count > 0 %>
 	<% @photos.each do |photo| %>
-		<% if @logged_in_user == @user_to_view %>
-			<%= link_to image_tag(photo.picture.url(:medium), :border => 0), edit_photo_path(photo) %>
-		<% else %>
-			<%= link_to image_tag(photo.picture.url(:medium)), photo_path(photo) %>
+		<td>
+			<% if @logged_in_user == @user_to_view %>
+					<%= link_to image_tag(photo.picture.url(params[:size]), :border => 0), edit_photo_path(photo) %>
+			<% else %>
+					<%= link_to image_tag(photo.picture.url(params[:size])), photo_path(photo) %>
+			<% end %>
+
+			<p><%= photo.caption %></p>
+		</td>
+
+		<% @photo_count = @photo_count + 1 %>
+
+		<% if (@photo_count % @row_count) == 0 %>
+			</tr>
+			<tr>
 		<% end %>
-		<p><%= photo.caption %></p>
 	<% end %>
 <% else %>
-	<p>No photos yet</p>
+		<td>No photos yet</td>
 <% end %>
+	</tr>
+</table>
