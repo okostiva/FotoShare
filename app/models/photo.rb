@@ -7,5 +7,6 @@ class Photo < ActiveRecord::Base
 		:content_type => { :content_type => ["image/jpg","image/jpeg","image/png","image/gif"], :message => "must be a jpg, png or gif image." }, 
 		:size => { :in => 0..1.megabytes, :message => "must be less than 1 megabyte" }
 
-	has_attached_file :picture, :styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" }, :default_url => "/images/photos/upload.png"
+	has_attached_file :picture, :path => "cs446/kostival/#{Rails.env}:url",
+		:styles => { :small => "100x100>", :medium => "300x300>", :large => "500x500>" }, :default_url => "/images/photos/upload.png"
 end

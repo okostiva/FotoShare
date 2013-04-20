@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
 		:size => { :in => 0..1.megabytes, :message => "must be less than 1 megabyte" }
 	has_secure_password
 
-	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>", :mini => "40x40>" }, :default_url => "/images/avatars/default.png"
+	has_attached_file :avatar, :path => "cs446/kostival/#{Rails.env}:url",
+		:styles => { :medium => "300x300>", :thumb => "100x100>", :mini => "40x40>" }, :default_url => "/images/avatars/default.png"
 end
