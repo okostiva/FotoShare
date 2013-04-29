@@ -1,8 +1,15 @@
 FotoShare::Application.routes.draw do
+  resources :friends
   resources :photos
   resources :users
 
 	get 'register' => 'users#new'
+
+	controller :friends do
+		get 'confirm_friend' => :confirm
+		get 'remove_friend' => :destroy
+		get 'request_friend' => :create
+	end
 
 	controller :sessions do
 		get 'login' => :new

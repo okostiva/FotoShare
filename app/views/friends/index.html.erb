@@ -1,0 +1,51 @@
+<h1>Listing friends</h1>
+
+<% if flash[:alert] %>
+	<p id="alert"><%= flash[:alert] %></p>
+<% end %>
+
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th></th>
+  </tr>
+
+
+<% @logged_in_user.friend_requests.each do |friend| %>
+  <tr>
+    <td>
+			<%= image_tag friend.avatar.url(:thumb) %><br />
+ 	 		<%= link_to "#{friend.first_name} #{friend.last_name}", friend %>
+		</td>
+    <td>
+				<%= link_to 'Approve Friend', "confirm_friend?friend_id=#{friend.id}&approve=true"	 %> <br />
+				<%= link_to 'Reject Friend', "confirm_friend?friend_id=#{friend.id}&approve=false" %>
+		</td>
+  </tr>
+<% end %>
+
+<% @logged_in_user.pending_friends.each do |friend| %>
+  <tr>
+    <td>
+			<%= image_tag friend.avatar.url(:thumb) %><br />
+ 	 		<%= "#{friend.first_name} #{friend.last_name}" %>
+		</td>
+		<td>Friend Requested</td>			
+  </tr>
+<% end %>
+
+<% @logged_in_user.accepted_friends.each do |friend| %>
+  <tr>
+    <td>
+			<%= image_tag friend.avatar.url(:thumb) %><br />
+ 	 		<%= link_to "#{friend.first_name} #{friend.last_name}", friend %>
+		</td>
+    <td><%= link_to 'Remove Friend', "remove_friend?friend_id=#{friend.id}", data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+
+</table>

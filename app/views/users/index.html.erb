@@ -8,12 +8,31 @@
   <tr>
     <th></th>
     <th>Name</th>
+		<th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><%= image_tag user.avatar.url(:thumb) %></td>
-    <td><%= link_to "#{user.first_name} #{user.last_name} (#{user.user_name})", photos_path(:user_id => user.id) %></td>
+		<% if @logged_in_user == user %>
+			<td><%= link_to "#{user.first_name} #{user.last_name} (#{user.user_name})", photos_path(:user_id => user.id) %></td>
+			<td></td>
+		<% elsif @logged_in_user.friend_requests.include?(user) %>
+	    <td><%= link_to "#{user.first_name} #{user.last_name} (#{user.user_name})", photos_path(:user_id => user.id) %></td>
+			<td>				
+				<%= link_to 'Approve Friend', "confirm_friend?friend_id=#{user.id}&approve=true" %> <br />
+				<%= link_to 'Reject Friend', "confirm_friend?friend_id=#{user.id}&approve=false" %>
+			</td>
+		<% elsif @logged_in_user.pending_friends.include?(user) %>
+	    <td><%= "#{user.first_name} #{user.last_name} (#{user.user_name})" %></td>
+			<td></td>
+		<% elsif @logged_in_user.accepted_friends.include?(user) %>
+	    <td><%= link_to "#{user.first_name} #{user.last_name} (#{user.user_name})", photos_path(:user_id => user.id) %></td>
+			<td></td>
+		<% else %>
+	    <td><%= "#{user.first_name} #{user.last_name} (#{user.user_name})" %></td>
+			<td><%= link_to 'Request Friend', "request_friend?friend_id=#{user.id}" %>
+		<% end %>
   </tr>
 <% end %>
 </table>
