@@ -122,6 +122,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeresource
   aws-sdk
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)

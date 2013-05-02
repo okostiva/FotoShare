@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 	skip_before_filter :authorize
+	before_filter :create_joke
 
   def new
   end
@@ -18,4 +19,11 @@ class SessionsController < ApplicationController
 		session[:user_id] = nil
 		redirect_to login_path, notice: "Successfully logged out."
   end
+
+	def create_joke
+		jokes = Joke.find(:all, :from => "/jokes")
+		index = Random.new.rand(jokes.count)
+
+		@joke = jokes[index]
+	end
 end

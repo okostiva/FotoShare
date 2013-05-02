@@ -22,8 +22,8 @@
  	 		<%= link_to "#{friend.first_name} #{friend.last_name}", friend %>
 		</td>
     <td>
-				<%= link_to 'Approve Friend', "confirm_friend?friend_id=#{friend.id}&approve=true"	 %> <br />
-				<%= link_to 'Reject Friend', "confirm_friend?friend_id=#{friend.id}&approve=false" %>
+				<%= link_to (content_tag :button, 'Approve Friend', :type => :button), "confirm_friend?friend_id=#{friend.id}&approve=true"	 %> <br />
+				<%= link_to (content_tag :button, 'Reject Friend', :type => :button), "confirm_friend?friend_id=#{friend.id}&approve=false" %>
 		</td>
   </tr>
 <% end %>
@@ -44,7 +44,7 @@
 			<%= image_tag friend.avatar.url(:thumb) %><br />
  	 		<%= link_to "#{friend.first_name} #{friend.last_name}", friend %>
 		</td>
-    <td><%= link_to 'Remove Friend', "remove_friend?friend_id=#{friend.id}", data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to (content_tag :button, 'Remove Friend', :type => :button), "remove_friend?friend_id=#{friend.id}", data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 

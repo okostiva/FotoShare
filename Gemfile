@@ -42,3 +42,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'debugger'
 
 gem 'aws-sdk'
+gem 'activeresource', :require => 'active_resource'
